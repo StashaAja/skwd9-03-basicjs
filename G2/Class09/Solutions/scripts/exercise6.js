@@ -1,26 +1,30 @@
-let sideAinput =document.getElementById("sideA");
-let sideBinput =document.getElementById("sideB");
-let myButton = document.getElementById("myButton");
-let messageParagraph = document.getElementById("message");
+let inputButton = document.getElementById("inputButton");
+let paragraph = document.getElementById("paragraph");
 
-myButton.addEventListener("click", function(){
-    if(!sideAinput.value || ! sideBinput.value){ //check if we have entered both sides
-        messageParagraph.innerText = "You must enter all the values";
-        return;
-    }
-    //remove style if there is any (if we repeat the events)
-    messageParagraph.style.removeProperty("color");
-    messageParagraph.style.removeProperty("font-size");
-    messageParagraph.innerText = `The area is: ${sideBinput.value * sideAinput.value}`;
-});
+function calculateArea(inputUno, inputDos) {
+    let a = parseFloat(inputUno);
+    let b = parseFloat(inputDos);
 
-messageParagraph.addEventListener("mouseover", function(){
-    if(!sideAinput.value || ! sideBinput.value){
-        this.innerText = "You must enter all the values";
-        return;
-    }
-    this.innerText = `The perimeter is: ${sideBinput.value*2 + sideAinput.value*2}`;
-    this.style.color = "red";
-    this.style.fontSize ="5em";
-    
-});
+    let area = a * b;
+    paragraph.innerText = `The area is: ${area}`;
+}
+
+function calculatePerimeter(inputUno, inputDos) {
+    let a = parseFloat(inputUno);
+    let b = parseFloat(inputDos);
+
+    let perimeter = 2 * a + 2 * b;
+    paragraph.innerText = `The perimeter is: ${perimeter}`;
+}
+
+inputButton.addEventListener("click", function () {                 //Question: Dali smeam vaka i dali e okej?
+    let inputOne = document.getElementById("inputOne").value;
+    let inputTwo = document.getElementById("inputTwo").value;
+    calculateArea(inputOne, inputTwo);
+    paragraph.addEventListener("mouseover", function () {
+        calculatePerimeter(inputOne, inputTwo);
+        this.style.color = "green";
+        this.style.fontSize = "35px";
+
+    })
+})
